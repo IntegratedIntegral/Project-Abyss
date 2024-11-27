@@ -1,0 +1,262 @@
+{
+    "swimming_creatures": [
+        {
+            "name": "Clownfish",
+            "size": {
+                "x": 11,
+                "y": 7
+            },
+            "speed": 0.02,
+            "cruising_time": 9000,
+            "turn_time": 200,
+            "layer": 0,
+            "description": "Clownfish, also known as Anemonefish, are famously\nknown for their bright orange colour and white stripes.\nThey are some of the few creatures able to survive the\nstinging toxins of sea anemones, allowing them to form\na mutualistic symbiotic relationship with them. The\nfish gains protection under the toxic tentacles, and in\nreturn the fish can pick off parasites from the anemone.",
+            "image_id": "clownfish"
+        },
+        {
+            "name": "Salmon",
+            "size": {
+                "x": 80,
+                "y": 26
+            },
+            "speed": 0.06,
+            "cruising_time": 5200,
+            "turn_time": 600,
+            "layer": 0,
+            "description": "Salmon are mid-level carnivorous fish, preying upon\nsmall invertebrates and fish. They are well known for\ntheir mouths that look like a bird's injured beak. They\nstart their lives in fresh water rivers and travel\ndownstream into the ocean, where they spend most of\ntheir lives. Once they reach maturity they make a\ndangerous journey back upstream to breed. Right after\nmating they suddenly die for no apparent reason.",
+            "image_id": "salmon"
+        },
+        {
+            "name": "Mackerel",
+            "size": {
+                "x": 30,
+                "y": 8
+            },
+            "speed": 0.11,
+            "cruising_time": 4500,
+            "turn_time": 300,
+            "layer": 0,
+            "description": "Mackerel are small agile fish that are from the\nScombridae family, which also includes tuna and\nbonito. Like tigers, they have a vertical stripe\npattern on their backs. Unlike tigers, however, they\nare not fierce ambush predators, but instead feed\non small fish, crustaceans and plankton.",
+            "image_id": "mackerel"
+        },
+        {
+            "name": "Moon Jellyfish",
+            "size": {
+                "x": 30,
+                "y": 31
+            },
+            "speed": 0.01,
+            "cruising_time": 8300,
+            "turn_time": 1400,
+            "layer": 0,
+            "description": "Despite their name and appearance, moon jellyfish did\nnot come from the Moon. They are one of the most\ncommon type of jellyfish, spanning all corners of the\nworld. They have many thin, short tentacles lining the\nrim of their bodies that, thankfully, have no effect on\nhumans, along with a few larger arms stemming from\nthe middle.",
+            "image_id": "moon_jellyfish"
+        },
+        {
+            "name": "Compass Jellyfish",
+            "size": {
+                "x": 20,
+                "y": 85
+            },
+            "speed": 0.01,
+            "cruising_time": 7500,
+            "turn_time": 1400,
+            "layer": 0,
+            "description": "These living blobs of gel are a common type of\njellyfish, inhabiting shallower waters. The brown\nstreaks on its bell make it look like a compass,\nhence the name. It is adviced not to touch the\ntentacles, unless you think it is a good idea to\nget a rather painful sting.",
+            "image_id": "compass_jelly"
+        },
+        {
+            "name": "Lanternfish",
+            "size": {
+                "x": 12,
+                "y": 4
+            },
+            "speed": 0.12,
+            "cruising_time": 5600,
+            "turn_time": 100,
+            "layer": 1,
+            "description": "When sonar operators were testing the newly invented\nsonar instruments during World War II they found, to\ntheir surprise, what appeared to be a 'sea floor' that\nwas 300 - 500 meters deep at day and shallower at\nnight! It turned out that this false sea floor were\nmillions of deep sea fauna, most of which were\nLanternfish; small deep sea fish that have many\nbioluminescent spots on their bodies.",
+            "image_id": "lanternfish"
+        },
+        {
+            "name": "Sabertooth Fish",
+            "size": {
+                "x": 18,
+                "y": 7
+            },
+            "speed": 0.08,
+            "cruising_time": 12300,
+            "turn_time": 500,
+            "layer": 1,
+            "description": "This nightmare of a fish is called a Sabertooth fish.\nThey have long, fierce looking teeth that resemble that\nof the sabertoothed cats you see at the natural\nhistory museum. Their eyes point upward to look for\nprey silhouetted against the little light that\npenetrates the water. Thankfully sabertooth fish are\ntoo small for us to be on the menu.",
+            "image_id": "sabertooth_fish"
+        },
+        {
+            "name": "Anglerfish",
+            "size": {
+                "x": 40,
+                "y": 35
+            },
+            "speed": 0.02,
+            "cruising_time": 8600,
+            "turn_time": 800,
+            "layer": 2,
+            "description": "What could be a more well known deep sea creature\nthat the Anglerfish. They use the light emitting\norgan stemming from their heads to lure in small\nfish from afar. The small fish, mesmerized by the\nlight, has no choice but to check it out. Eventually\nthe little fish comes across the angler fish,\ninviting the little fish to take refuge in the\ninside her mouth, safe from the cruelties of the\ndeep ocean.",
+            "image_id": "anglerfish"
+        },
+        {
+            "name": "Vampire Squid",
+            "size": {
+                "x": 30,
+                "y": 15
+            },
+            "speed": 0.01,
+            "cruising_time": 33400,
+            "turn_time": 1000,
+            "layer": 2,
+            "description": "There are many things in this world that are named\nbased on their superficial appearance. The vampire\nsquid is a good example. It was named so because\nof the reddish colour and the webbing between its\ntentacles that resemble a bat's wings. Unlike their\nname, however, they do not drink blood nor inspire\nhalloween costumes (although they do live in a place\nof constant darkness). Instead they feed on the dead\nmatter and whatnot that trickles down from above.",
+            "image_id": "vampire_squid"
+        },
+        {
+            "name": "Chimaera",
+            "size": {
+                "x": 140,
+                "y": 36
+            },
+            "speed": 0.04,
+            "cruising_time": 13900,
+            "turn_time": 700,
+            "layer": 2,
+            "description": "Not to be confused with the mythological lion with\na snake for a tail and a goat's head sticking out of\nthe back; a chimaera, also called a ghost shark, looks\nlike a cross between a shark and a stingray, with the\nhead of a rabbit. Chimaera are cartilaginous fish,\nwhich means that their skeletons are made of the same\nflexible stuff that make up our joints, just like\nsharks and stingrays.",
+            "image_id": "chimaera"
+        },
+        {
+            "name": "Cusk Eel",
+            "size": {
+                "x": 90,
+                "y": 15
+            },
+            "speed": 0.04,
+            "cruising_time": 7700,
+            "turn_time": 900,
+            "layer": 3,
+            "description": "This handsome gentlefish is a Cusk Eel. The deepest\nspecimen of fish discovered was a species of Cusk\nEel, called Abyssobrotula Galatheae. It reached a\ndepth of 8,730 meters (27,460 feet)! Also, Cusk Eels\nare not actually true eels; They are just another\none of those things that are named after their\nsuperficial appearance.",
+            "image_id": "cusk_eel"
+        },
+        {
+            "name": "Dumbo Octopus",
+            "size": {
+                "x": 35,
+                "y": 25
+            },
+            "speed": 0.02,
+            "cruising_time": 6400,
+            "turn_time": 500,
+            "layer": 3,
+            "description": "Dumbo Octopi are the deepest living, and possibly the\ncutest, octopi in the world. The octopi are yet\nanother creature named after their superficial\nappearance. In this case they were named after dumbo,\na fictional elephant who had ear muscles strong enough\nto provide aviation. The ear-like fins attached to its\nmantle do indeed provide locomotive abilities.",
+            "image_id": "dumbo_octopus"
+        }
+    ],
+    "sessile_creatures": [
+        {
+            "name": "Sea Anemone",
+            "size": {
+                "x": 20,
+                "y": 14
+            },
+            "layer": 0,
+            "description": "At first glance these may look like flowers you'd find\nin the garden of someone who lives underwater, fearing\nthat some catastrophic event will wipe out all of\nhumanity on land, but they are infact animals. They use\ntheir 'foot' to anchor onto a suitable surface. The\nmouth that they have on the top is surrounded by a\nmass of tentacles that they use to paralyze their prey\nbefore drawing them into their mouths.",
+            "image_id": "sea_anemone"
+        },
+        {
+            "name": "Barnacle",
+            "size": {
+                "x": 60,
+                "y": 4
+            },
+            "layer": 0,
+            "description": "It was long thought that barnacles were mollusks, since\nthey live in shells. It wasn't until 1830 that they were\ndiscovered to be crustaceans! Yep, they are more\nclosely related to crabs than limpets and snails.\nBarnacles start their lives as tiny free living larvae\nthat look unmistakingly like crustaceans. Later on they\nattach themselves to a surface and form a shell.",
+            "image_id": "barnacles"
+        },
+        {
+            "name": "Seagrass",
+            "size": {
+                "x": 52,
+                "y": 34
+            },
+            "layer": 0,
+            "description": "Plants are, without doubt, land creatures. After the\nfirst plants grew on land they went crazy and covered\nentire continents. All plants love land! Well, all but a\nfew. Some plants found out it was actually nicer to live\nin the water for a change, just like the good ol' days.\nAmong these aquatic plants are the seagrasses.\nSeagrasses are just like grasses, but underwater! They\nphotosynthesis underwater, spread underwater and get\neaten underwater.",
+            "image_id": "seagrass"
+        },
+        {
+            "name": "Mussel",
+            "size": {
+                "x": 27,
+                "y": 20
+            },
+            "layer": 0,
+            "description": "Mussels are Bivalves, or two-shelled mollusks. They\ncling on to rocks using a mass of thread-like material,\ncalled a byssus, making them look like they have\nbeards. Mussels are generally colonial animals,\nsometimes even taking over entire rocks. Unfortunately,\ndue to their sessile nature, they are unable to peform\nphysical exercise, and are thus unable to live up to\ntheir name.",
+            "image_id": "mussels"
+        },
+        {
+            "name": "Reef Coral",
+            "size": {
+                "x": 51,
+                "y": 45
+            },
+            "layer": 0,
+            "description": "Corals are one those things that we tend to treat\nas a background decoration, like what we do with\nplants, which is funny given the fact that they are\nanimals, thousands of them infact. A coral is not\none, but many many individuals that make up a colony.\nEach individual is called a polyp, and they look\nlike miniature anemones. Reef corals generally have\na calcium carbonate skeleton for structural support\nand host symbiotic algae that can provide sugars.",
+            "image_id": "reef_coral"
+        },
+        {
+            "name": "Sponge",
+            "size": {
+                "x": 58,
+                "y": 55
+            },
+            "layer": 1,
+            "description": "If you asked me what the absolute wierdest animal I\nknow of is, I would definitely say sponges. They\nhave no body plan at all. They are just filter feeding\nlumps of cells that can grow however, wherever,\nwhenever they want. You can cut up a sponge into a\nmillion pieces and you'll get a million sponges.\nInterestingly, one sponge was discovored to be able to\nmake burgers and even work at a fast food resturant.",
+            "image_id": "sponge"
+        },
+        {
+            "name": "Sea Pen",
+            "size": {
+                "x": 41,
+                "y": 96
+            },
+            "layer": 1,
+            "description": "Sea Pens are a type of soft coral that got their name\ndue to the resemblance to a classic writing quill.\nLike all corals, sea pens are made up of many\nindividuals, called polyps, that make up one\nsuperorganism. Unlike most other corals, however, the\npolyps can take on different roles, such as feeding,\nanchoring and reproduction. Luckily, Sea Pens don't\npossess any writing capabilities, otherwise they would\nhave been hunted down for use as actual pens.",
+            "image_id": "sea_pen"
+        },
+        {
+            "name": "Bubblegum Coral",
+            "size": {
+                "x": 40,
+                "y": 54
+            },
+            "layer": 1,
+            "description": "When you think of carnivores bubblegum coral\ndefinitely does not come to mind, but they are indeed\ncarnivorous. Due to the little sunlight they recieve\nsymbiotic algae would be uneffective. So instead\ncorals living this deep have turned to predation.\nEach polyp will use their stinging tentacles to catch\nany plankton that happen to find themselves in such an\nunfortunate situation.",
+            "image_id": "bubblegum_coral"
+        },
+        {
+            "name": "Tube Worm",
+            "size": {
+                "x": 62,
+                "y": 196
+            },
+            "layer": 2,
+            "description": "Not the sort of worms you would find in your everyday\ngarden. Tube Worms are deep sea worms that build\na tube for them to live in. They have no mouth or gut.\nInstead they derive their nutrients from symbiotic\nbacteria. By living near hydrothermal vents, the\nbacteria can convert the chemicals from the vent into\nusable nutrients. Tube Worms can also live for\nhundreds of years.",
+            "image_id": "tube_worm"
+        },
+        {
+            "name": "Deep Sea Crinoid",
+            "size": {
+                "x": 15,
+                "y": 40
+            },
+            "layer": 3,
+            "description": "Crinoids are an amazingly unique animal. Crinoids in\nshallower waters start off having stalks in their\njuvenile stage, but as they grow the break free from\nit and become a free living adult. Their deep water\nrelatives, on the other hand, are afraid of growing up\nand remain stalked all their lives. They use their\nfeather-like structures to catch prey floating\nthrough the water.",
+            "image_id": "deep_crinoid"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+A list of things to add after the game jam:
+
+creatures:
+    more creatures!
+    creatures that move along surfaces
+    creature animations
+
+enviroment:
+    make chunk placement more structered rather than random
+    anomolies
+    the hadopelagic layer
+
+shaders
