@@ -7,7 +7,7 @@ creatures:
 
 enviroment:
     make chunk placement more structered rather than random
-    anomolies
+    anomalies
     the hadopelagic layer
 
 shaders
