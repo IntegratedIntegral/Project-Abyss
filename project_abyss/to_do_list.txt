@@ -11,3 +11,6 @@ enviroment:
     the hadopelagic layer
 
 shaders
+main menu
+equipment
+save data

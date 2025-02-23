@@ -28,10 +28,13 @@ class SwimmingCreature(Creature):
         self.template_image = pg.transform.scale(self.image, self.size)
         self.dir_vec = pg.Vector2()
         self.speed = type["speed"]
+        self.spook_speed = type["spook_speed"]
         self.cruising_time = type["cruising_time"]
         self.cruise_timer = 0 #a timer for how long the creature will be cruising at a constant velocity before turning
         self.turn_time = type["turn_time"]
         self.turn_timer = self.turn_time
+        self.spooked = False
+        self.just_fled = False
         self.set_dir_change()
 
     def set_cruise_timer(self):
@@ -49,7 +52,9 @@ class SwimmingCreature(Creature):
         self.add_to_journal(focus_pos, player, lmb_pressed)
     
     def swim(self, delta_t):
-        self.pos += self.speed * self.dir_vec * delta_t
+        if self.spooked: self.pos += self.spook_speed * self.dir_vec * delta_t
+        else: self.pos += self.speed * self.dir_vec * delta_t
+        
         if self.pos.x < 0:
             self.pos.x = 0
         elif self.pos.x > WORLD_WIDTH:
@@ -62,9 +67,11 @@ class SwimmingCreature(Creature):
     def update_timers(self, delta_t):
         if self.cruise_timer > 0:
             self.cruise_timer -= delta_t
+            self.just_fled = False
         elif self.turn_timer > 0:
             self.turn_timer -= delta_t
             self.turn(delta_t)
+            if not self.just_fled: self.spooked = False
         else:
             self.dir_vec.normalize()
             self.set_cruise_timer()
@@ -79,9 +86,11 @@ class SwimmingCreature(Creature):
             self.image = self.template_image
     
     def flee(self, player):
-        new_dir = (self.pos - player.pos).normalize() * SPOOK_FACTOR
+        new_dir = (self.pos - player.pos).normalize()
         self.dir_change = new_dir - self.dir_vec
         self.cruise_timer = 0
+        self.spooked = True
+        self.just_fled = True
 
 #creatures that live on solid surfaces, such as sea anemones, barnacles and sea grass
 class GroundCreature(Creature):

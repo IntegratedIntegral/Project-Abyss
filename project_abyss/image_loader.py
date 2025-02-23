@@ -15,6 +15,7 @@ class ImageLoader:
             "mackerel": self.load("mackerel"),
             "moon_jellyfish": self.load("moon_jellyfish"),
             "compass_jelly": self.load("compassjelly"),
+            "cutlassfish": self.load("cutlassfish"),
             "lanternfish": self.load("lanternfish"),
             "sabertooth_fish": self.load("sabertooth_fish"),
             "vampire_squid": self.load("vampire_squid"),
