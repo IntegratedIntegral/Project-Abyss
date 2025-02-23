@@ -2,6 +2,8 @@ import os
 from settings import *
 from image_loader import ImageLoader
 from world_objects import WorldObjects
+from main_menu import MainMenu
+from pause_menu import PauseMenu
 
 class Main:
     def __init__(self):
@@ -9,6 +11,12 @@ class Main:
 
         pg.init()
         self.window = pg.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+
+        self.mainmenu = MainMenu()
+        self.mainmenu_active = True
+
+        self.pausemenu = PauseMenu()
+        self.pausemenu_active = False
         
         pg.display.set_caption("Project Abyss (loading, please wait)")
         self.image_loader = ImageLoader()
@@ -42,6 +50,10 @@ class Main:
                     self.lmb_pressed = False
                 if event.button == 3:
                     self.rmb_pressed = False
+            
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_ESCAPE:
+                    self.pausemenu_active = not self.pausemenu_active
 
     def run(self):
         while self.running:
@@ -49,9 +61,15 @@ class Main:
 
             self.check_events()
 
-            self.bg_col = self.world_objects.get_bg_colour()
-            self.window.fill(self.bg_col)
-            self.world_objects.update(self.window, self.lmb_pressed, self.rmb_pressed, self.delta_t)
+            if self.mainmenu_active:
+                self.window.fill(self.bg_colour)
+                self.mainmenu.update(self)
+            elif self.pausemenu_active:
+                self.pausemenu.update(self)
+            else:
+                self.window.fill(self.bg_colour)
+                self.bg_colour = self.world_objects.get_bg_colour()
+                self.world_objects.update(self.window, self.lmb_pressed, self.rmb_pressed, self.delta_t)
 
             pg.display.flip()
         pg.quit()
