@@ -2,13 +2,18 @@ import pygame as pg
 import math
 import random
 
+pg.font.init()
+
 WINDOW_WIDTH = 1700
 WINDOW_HEIGHT = 950
 SEMI_WINDOW_WIDTH = WINDOW_WIDTH // 2
 SEMI_WINDOW_HEIGHT = WINDOW_HEIGHT // 2
 
-BRIGHTNESS_HALF_LIFE = 1100
-BRIGHTNESS_DECAY_CONSTANT = -math.log(math.pow(0.5, 1 / BRIGHTNESS_HALF_LIFE)) #how quickly the brightness decreases with depth
+UI_FONT = pg.font.SysFont("arial", 20)
+BUTTON_COLOUR = (201, 201, 201)
+
+#BRIGHTNESS_HALF_LIFE = 1100
+#BRIGHTNESS_DECAY_CONSTANT = -math.log(math.pow(0.5, 1 / BRIGHTNESS_HALF_LIFE)) #how quickly the brightness decreases with depth
 
 TILE_SIZE = 64
 CHUNK_SIZE_TILES = 25 #measured in tiles
