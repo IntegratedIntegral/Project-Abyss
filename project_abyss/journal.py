@@ -1,4 +1,5 @@
 from settings import *
+from paragraph_render import render_paragraph
 
 class Journal:
     def __init__(self):
@@ -7,7 +8,7 @@ class Journal:
         self.pos = pg.Vector2(1000, 70)
 
         self.info_panel = pg.surface.Surface((400, 200))
-        self.info_panel.fill((201, 201, 201))
+        self.info_panel.fill(BUTTON_COLOUR)
 
         self.species = []
         self.icon_positions = []
@@ -59,12 +60,12 @@ class Journal:
                     self.show_info(self.species[i])
     
     def show_info(self, species):
-        self.info_panel.fill((201, 201, 201))
+        self.info_panel.fill(BUTTON_COLOUR)
         
         title_surf = self.font.render(species["name"], True, (0, 0, 0))
         self.info_panel.blit(title_surf, (30, 8))
         
-        desc_surf = self.font.render(species["description"], True, (0, 0, 0))
+        desc_surf = render_paragraph(species["description"], self.font, 380)
         self.info_panel.blit(desc_surf, (10, 28))
     
     def reset(self):
