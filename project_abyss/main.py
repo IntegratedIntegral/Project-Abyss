@@ -4,6 +4,7 @@ from image_loader import ImageLoader
 from world_objects import WorldObjects
 from main_menu import MainMenu
 from pause_menu import PauseMenu
+from save_menu import SaveMenu
 
 class Main:
     def __init__(self):
@@ -17,13 +18,14 @@ class Main:
 
         self.pausemenu = PauseMenu()
         self.pausemenu_active = False
+
+        self.savemenu = SaveMenu()
+        self.savemenu_active = False
         
-        pg.display.set_caption("Project Abyss (loading, please wait)")
+        #pg.display.set_caption("Project Abyss (loading, please wait)")
         self.image_loader = ImageLoader()
 
         self.delta_t = 0
-
-        self.world_objects = WorldObjects(self.image_loader)
         
         self.lmb_pressed = False
         self.rmb_pressed = False
@@ -34,10 +36,14 @@ class Main:
 
         self.clock = pg.time.Clock()
     
+    def load_world(self, save_data, save_name):
+        self.world_objects = WorldObjects(save_data, save_name, self.image_loader)
+    
     def check_events(self):
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.running = False
+                self.world_objects.save()
         
             if event.type == pg.MOUSEBUTTONDOWN:
                 if event.button == 1:
@@ -66,6 +72,9 @@ class Main:
                 self.mainmenu.update(self)
             elif self.pausemenu_active:
                 self.pausemenu.update(self)
+            elif self.savemenu_active:
+                self.window.fill(self.bg_colour)
+                self.savemenu.update(self)
             else:
                 self.window.fill(self.bg_colour)
                 self.bg_colour = self.world_objects.get_bg_colour()
@@ -75,8 +84,9 @@ class Main:
         pg.quit()
 
 if __name__ == "__main__":
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    os.chdir(dir_path)
+    #dir_path = os.path.realpath(os.path.dirname(__file__))
+    #print(dir_path)
+    #os.chdir(dir_path)
     
     app = Main()
     app.run()

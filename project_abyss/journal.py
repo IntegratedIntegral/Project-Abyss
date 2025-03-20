@@ -10,7 +10,7 @@ class Journal:
         self.info_panel = pg.surface.Surface((400, 200))
         self.info_panel.fill(BUTTON_COLOUR)
 
-        self.species = []
+        self._species = []
         self.icon_positions = []
 
         self.icon_size = 96
@@ -18,12 +18,23 @@ class Journal:
 
         self.font = pg.font.SysFont("arial", 16)
     
+    @property
+    def species(self):
+        return self._species
+    
+    @species.setter
+    def species(self, val):
+        self._species = val
+        self.icon_positions = []
+        for i in range(len(val)):
+            self.icon_positions.append((self.icon_size * (i % self.grid_width), self.icon_size * (i // self.grid_width)))
+    
     def update(self, window, images, lmb_pressed):
         self.draw(window, images)
         self.select_species(lmb_pressed)
     
     def draw_species(self, index, images):
-        species = self.species[index] #singular for species is species!
+        species = self._species[index] #singular for species is species!
 
         image = images[species["image_id"]]
         size = image.size
@@ -39,7 +50,7 @@ class Journal:
         self.surf.blit(image, self.icon_positions[index] + offset)
     
     def draw(self, window, images):
-        for i in range(len(self.species)):
+        for i in range(len(self._species)):
             self.draw_species(i, images)
         
         self.surf.blit(self.info_panel, (150, 600))
@@ -47,17 +58,17 @@ class Journal:
     
     def add_species(self, species):
         i = len(self.species)
-        self.species.append(species)
+        self._species.append(species)
         self.icon_positions.append((self.icon_size * (i % self.grid_width), self.icon_size * (i // self.grid_width)))
     
     def select_species(self, lmb_pressed):
         if lmb_pressed:
             mouse_pos = pg.Vector2(pg.mouse.get_pos())
-            for i in range(len(self.species)):
+            for i in range(len(self._species)):
                 icon_pos = self.icon_positions[i]
                 rel_mouse_pos = mouse_pos - icon_pos - self.pos
                 if rel_mouse_pos.x > 0 and rel_mouse_pos.x < self.icon_size and rel_mouse_pos.y > 0 and rel_mouse_pos.y < self.icon_size:
-                    self.show_info(self.species[i])
+                    self.show_info(self._species[i])
     
     def show_info(self, species):
         self.info_panel.fill(BUTTON_COLOUR)
