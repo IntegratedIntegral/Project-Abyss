@@ -12,5 +12,6 @@ class MainMenu:
         
         if self.play_button.pressed:
             app.mainmenu_active = False
+            app.savemenu_active = True
         if self.quit_button.pressed:
             app.running = False

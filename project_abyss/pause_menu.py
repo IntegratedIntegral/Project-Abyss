@@ -15,3 +15,4 @@ class PauseMenu():
         if self.exit_button.pressed:
             app.mainmenu_active = True
             app.pausemenu_active = False
+            app.world_objects.save()

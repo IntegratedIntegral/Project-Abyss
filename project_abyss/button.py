@@ -15,7 +15,7 @@ class Button:
             self.surf = pg.surface.Surface(size)
             self.surf.fill(colour)
 
-        self.clicked = False
+        self.pressed = False
     
     def update(self, window):
         window.blit(self.surf, self.rect)

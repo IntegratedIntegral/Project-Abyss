@@ -8,29 +8,36 @@ from map import Map
 from particles import Particles
 
 class WorldObjects:
-    def __init__(self, image_loader):
+    def __init__(self, save_data, save_name, image_loader):
+        self.save_name = save_name
+        
         self.image_loader = image_loader
         self.font = pg.font.SysFont("arial", 36)
-        self.layer_text = self.font.render(LAYER_NAMES[0] + " zone", True, (255, 255, 255))
+        self.layer_text = self.font.render(LAYER_NAMES[save_data["layer"]] + " zone", True, (255, 255, 255))
 
-        self.layer_index = 0
-        self.old_layer_index = 0
-        self.fade_timer = FADE_TIMER
-        self.new_layer_entered = True
+        self.layer_index = save_data["layer"]
+        self.old_layer_index = save_data["layer"]
+        self.fade_timer = 0
+        self.new_layer_entered = False
 
         self.swimming_creature_types, self.sessile_creature_types = self.load_creatures()
 
-        self.player = Player(PLAYER_STARTING_POS, image_loader.player, image_loader.tank)
-        self.submarine = Submarine(SUBMARINE_STARTING_POS, image_loader.submarine)
+        self.player = Player(tuple(save_data["player_pos"]), image_loader.player, image_loader.tank)
+        self.submarine = Submarine(save_data["submarine_pos"], image_loader.submarine)
         self.map = Map()
 
-        self.chunks = self.generate_chunks()#[Chunk((0, 0)), Chunk((1, 0))]
+        if len(save_data["chunks"]) == 0: self.chunks = self.generate_chunks() #generate chunks if chunk data is empty, which is when a new game has started
+        else: self.chunks = self.load_chunks(save_data["chunks"]) #load chunk data
         self.visited_chunks = []
+
+        self.collidable_tiles = []
 
         self.swimming_creatures = []
         self.swimming_creature_spawn_timer = random.randint(SWIMMING_CREATURE_SPAWN_TIMER_MIN, SWIMMING_CREATURE_SPAWN_TIMER_MAX)
         self.sessile_creatures = []
         #self.crab = CrawlingCreature(self.chunks[0], self.crawling_creature_types[0], self.image_loader.swimming_creatures)
+
+        self.player.journal.species = save_data["documented_species"]
 
         self.focus_pos = pg.Vector2()
 
@@ -74,43 +81,44 @@ class WorldObjects:
             self.layer_text = self.font.render(LAYER_NAMES[self.layer_index] + " zone", True, (255, 255, 255))
         self.update_fade_timer(delta_t)
         
-        collidable_tiles = [] #list of collidable tiles that are within range of player.
-        visible_chunks = []
-        for chunk in self.chunks:
-            apparent_pos = chunk.pos - self.focus_pos
-            #only draw chunk if it is within the window borders
-            if apparent_pos.x + CHUNK_SIZE > 0 and apparent_pos.x < WINDOW_WIDTH and apparent_pos.y + CHUNK_SIZE > 0 and apparent_pos.y < WINDOW_HEIGHT:
-                chunk.draw(window, self.focus_pos, self.image_loader.tiles)
-                #adds the chunks collidable tiles to this list only when the chunk is in viewing range, so that the player's collision detection doesn't have to worry about tiles off the border. 
-                collidable_tiles += chunk.collidable_tiles
-                visible_chunks.append(chunk)
-                if not chunk in self.visited_chunks:
-                    self.spawn_sessile_creatures(chunk)
+        self.update_chunks(window)
         
         self.particles.update(window, self.focus_pos, self.image_loader.particle, delta_t)
 
         #update swimming creatures
-        for creature in self.swimming_creatures:
-            self.update_swimming_creature(window, creature, lmb_pressed, delta_t)
+        for creature in self.swimming_creatures: self.update_swimming_creature(window, creature, lmb_pressed, delta_t)
         
-        #draw sessile creatures
-        for creature in self.sessile_creatures:
-            self.update_sessile_creature(window, creature, lmb_pressed)
+        #update sessile creatures
+        for creature in self.sessile_creatures: self.update_sessile_creature(window, creature, lmb_pressed)
         
         self.submarine.draw(window, self.focus_pos)
-        self.player.update(window, self.focus_pos, collidable_tiles, self.submarine, self.map.waypoint, self.image_loader.creatures, lmb_pressed, delta_t)
+
+        self.player.update(window, self.focus_pos, self.collidable_tiles, self.submarine, self.map.waypoint, self.image_loader.creatures, lmb_pressed, delta_t)
         
         #self.crab.update(window, self.focus_pos, collidable_tiles, delta_t)
 
-        if self.player.boarded:
-            self.map.update(window, self.chunks, lmb_pressed, rmb_pressed, self.submarine)
+        if self.player.boarded: self.map.update(window, self.chunks, lmb_pressed, rmb_pressed, self.submarine)
         
         window.blit(self.layer_text, (20, 20))
+
+        if self.player.oxygen <= 0: self.reset()
+    
+    def update_chunks(self, window):
+        self.collidable_tiles = [] #list of collidable tiles that are within range of player.
+        visible_chunks = []
+        for chunk in self.chunks:
+            apparent_pos = chunk.pos - self.focus_pos
+
+            #only draw chunk if it is within the window borders
+            if apparent_pos.x + CHUNK_SIZE > 0 and apparent_pos.x < WINDOW_WIDTH and apparent_pos.y + CHUNK_SIZE > 0 and apparent_pos.y < WINDOW_HEIGHT:
+                chunk.draw(window, self.focus_pos, self.image_loader.tiles)
+                #adds the chunks collidable tiles to this list only when the chunk is in viewing range, so that the player's collision detection doesn't have to worry about tiles off the border. 
+                self.collidable_tiles += chunk.collidable_tiles
+                visible_chunks.append(chunk)
+
+                if not chunk in self.visited_chunks: self.spawn_sessile_creatures(chunk)
         
         self.visited_chunks = visible_chunks
-
-        if self.player.oxygen <= 0:
-            self.reset()
     
     def update_spawn_timer(self, delta_t):
         if self.swimming_creature_spawn_timer > 0:
@@ -172,6 +180,12 @@ class WorldObjects:
                     dominant_sessile_creature = possible_types[random.randint(0, len(possible_types) - 1)]["name"]
                     chunks.append(Chunk((x, y), dominant_sessile_creature))
         return chunks
+    
+    def load_chunks(self, chunks_data):
+        chunks = []
+        for chunk_data in chunks_data:
+            chunks.append(Chunk(tuple(chunk_data["pos"]), chunk_data["dominant_sessile_creature"], generate_new_tiles=len(chunk_data["tiles"]) == 0, tiles=chunk_data["tiles"]))
+        return chunks
 
     def load_creatures(self):
         with open("creature_types.json") as file:
@@ -198,6 +212,24 @@ class WorldObjects:
     def reset(self):
         self.player.reset()
         self.submarine.pos = pg.Vector2(SUBMARINE_STARTING_POS)
+    
+    def save(self):
+        chunks_data = []
+        for chunk in self.chunks:
+            chunks_data.append({
+                "pos": (chunk.pos.x // CHUNK_SIZE, chunk.pos.y // CHUNK_SIZE),
+                "dominant_sessile_creature": chunk.dominant_sessile_creature,
+                "tiles": chunk.tiles
+            })
+        data = {
+            "player_pos": (self.player.pos.x, self.player.pos.y),
+            "submarine_pos": (self.submarine.pos.x, self.submarine.pos.y),
+            "layer": self.layer_index,
+            "documented_species": self.player.journal.species,
+            "chunks": chunks_data
+        }
+        with open(f"save_data/{self.save_name}", "w") as file:
+            json.dump(data, file)
 
     def get_layer_index(self, depth=None):
         if not depth:
@@ -214,8 +246,8 @@ class WorldObjects:
             if self.fade_timer > 0:
                 self.fade_timer -= delta_t
             else:
-                self.fade_timer = FADE_TIMER
                 self.new_layer_entered = False
+                self.fade_timer = FADE_TIMER
 
     def get_bg_colour(self):
         if self.new_layer_entered:
