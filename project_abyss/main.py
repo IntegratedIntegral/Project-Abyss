@@ -59,7 +59,7 @@ class Main:
             
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
-                    self.pausemenu_active = not self.pausemenu_active
+                    if not (self.mainmenu_active or self.savemenu_active): self.pausemenu_active = not self.pausemenu_active
 
     def run(self):
         while self.running:
