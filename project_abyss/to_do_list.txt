@@ -13,4 +13,3 @@ enviroment:
 shaders
 main menu
 equipment
-save data
